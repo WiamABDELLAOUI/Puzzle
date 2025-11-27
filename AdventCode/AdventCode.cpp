@@ -35,11 +35,33 @@ bool isSafe(const std::vector<int>& levels) {
 
     return increasing || decreasing;
 }
+bool isSafeWithRemoval(const std::vector<int>& levels) {
+	//Si c'est déjà safe, pas besoin de suppression
+    if (isSafe(levels)) {
+        return true;
+    }
 
+    // 1 suppression max
+    for (size_t i = 0; i < levels.size(); i++) {
+        std::vector<int> levels_modifies;
+
+        for (size_t j = 0; j < levels.size(); j++) {
+            if (j != i) {
+				levels_modifies.push_back(levels[j]); // je copie tout sauf l'élément à l'index i
+            }
+        }
+
+        if (isSafe(levels_modifies)) {
+            return true;  // Safe avec exactement 1 suppression
+        }
+    }
+
+    return false;  // Pas safe même avec une suppression
+}
 int main() {
     std::ifstream file("input.txt");
     if (!file) {
-        std::cerr << "Error: Could not open file" << std::endl;
+        std::cerr << "Ouverture ratee" << std::endl;
         return 1;
     }
 
@@ -58,6 +80,14 @@ int main() {
         if (isSafe(levels)) {
             safeCount++;
         }
+        
+        // Vérification avec une suppression possible
+		
+        /*if (isSafeWithRemoval(levels)) {
+            safeCount++;
+		}
+        */
+        
     }
 
     std::cout << safeCount << std::endl;

@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="AdventCode/AdventCode.vcxproj" />
+  <Project Path="AdventCode/AdventCode.vcxproj" Id="45c56b2f-e8e2-4be6-84c5-f722ea16c8ad" />
 </Solution>
